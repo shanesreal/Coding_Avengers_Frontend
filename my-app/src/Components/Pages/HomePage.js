@@ -10,20 +10,22 @@ export const HomePage = () => {
         </Typography>
         <Grid container spacing={4} justifyContent="center">
           <Grid item>
-            <MyButton name="New Game" style={{ backgroundColor: 'red', color: 'black' }} />
+            <MyButton name="New Game" route="/new-game" style={{ backgroundColor: 'red', color: 'black' }} />
           </Grid>
           <Grid item>
-            <MyButton name="Load Game" style={{ backgroundColor: 'lightblue', color: 'black' }} />
+            <MyButton name="Load Game" route="/load-game" style={{ backgroundColor: 'lightblue', color: 'black' }} />
           </Grid>
           <Grid item>
-            <MyButton name="Settings" style={{ backgroundColor: 'lightgreen', color: 'black' }} />
+            <MyButton name="Settings" route="/settings" style={{ backgroundColor: 'lightgreen', color: 'black' }} />
           </Grid>
         </Grid>
         <Grid container justifyContent="center" style={{ marginTop: '40px' }}>
           <Grid item>
-            <MyButton name="Leaderboard" style={{ backgroundColor: 'yellow', color: 'black' }} />
+            <MyButton name="Leaderboard" route="/leaderboard" style={{ backgroundColor: 'yellow', color: 'black' }} />
           </Grid>
         </Grid>
       </div>
     )
 }
+
+export default HomePage;

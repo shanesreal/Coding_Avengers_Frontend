@@ -25,12 +25,15 @@ export const HomePage = () => {
             <MyButton name="Settings" route="/settings" style={{ backgroundColor: 'lightgreen', color: 'black' }} />
           </Grid>
         </Grid>
-            <Grid container justifyContent="center" style={{ marginTop: '40px' }}>
-        </Grid>
-        <Box mt={2}>
+        <Grid container justifyContent="center" spacing={2} style={{ marginTop: '40px' }}>
+          <Grid item>
             <MyButton name="Leaderboard" style={{ backgroundColor: 'yellow', color: 'black' }} />
-        </Box>
-    </Box>
+          </Grid>
+          <Grid item>
+            <MyButton name="Make Questions" route="/questions-page" style={{ backgroundColor: 'black', color: 'white' }} />  {/* Visible to teachers only */}
+          </Grid>
+        </Grid>
+      </Box>
     )
 }
 

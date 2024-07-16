@@ -68,7 +68,7 @@ export const NewGame = () => {
             </Box>
             <Grid container spacing={4} justifyContent="center" style={{ marginTop: '5px', marginBottom: '40px'}}>
                 <Grid item>
-                    <MyButton name="Start Game" route="" style={{ backgroundColor: 'green', color: 'black' }} />
+                    <MyButton name="Start Game" route="/game-board" style={{ backgroundColor: 'green', color: 'black' }} />
                 </Grid>
                 <Grid item>
                     <MyButton name="Go Back" route="/home-page" style={{ backgroundColor: 'red', color: 'black' }} />

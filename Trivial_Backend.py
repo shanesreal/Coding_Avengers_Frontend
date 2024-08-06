@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import random
 
 app = Flask(__name__)
@@ -13,6 +13,40 @@ def rollDice():
     <h1 id="dice">{value}</h1>
     </div>'''
 
+@app.route('/game')
+def getDatabase():
+    teach = Teacher("Ify","123456")
+
+    teach.addC("Addition")
+    teach.addQ("Addition","What's 5 + 5 ?","10")
+    teach.addQ("Addition","What's 10 + 10 ?","20")
+    teach.addQ("Addition","What's 10 + 5 ?","15")
+    teach.addQ("Addition","What's 0 + 5 ?","5")
+
+    teach.addC("Subtraction")
+    teach.addQ("Subtraction","What's 5 - 5 ?","0")
+    teach.addQ("Subtraction","What's 10 - 5 ?","5")
+    teach.addQ("Subtraction","What's 15 - 5 ?","10")
+    teach.addQ("Subtraction","What's 25 - 5 ?","20")
+        
+
+    teach.addC("Multiplication")
+    teach.addQ("Multiplication","What's 5 * 5 ?","25")
+    teach.addQ("Multiplication","What's 10 * 5 ?","50")
+    teach.addQ("Multiplication","What's 2 * 5 ?","10")
+    teach.addQ("Multiplication","What's 4 * 5 ?","20")
+
+
+    teach.addC("Division")
+    teach.addQ("Division","What's 5 / 5 ?","1")
+    teach.addQ("Division","What's 10 / 5 ?","2")
+    teach.addQ("Division","What's 20 / 5 ?","4")
+    teach.addQ("Division","What's 40 / 5 ?","8")
+
+    database = teach.data.database
+
+    return jsonify(database)
+    
     
 
 @app.route('/')

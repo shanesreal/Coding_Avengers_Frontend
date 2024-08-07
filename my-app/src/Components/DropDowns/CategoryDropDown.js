@@ -27,10 +27,10 @@ export default function SelectVariants({fieldname}) {
         onChange={handleChange}
         label="Color"
         >
-        <MenuItem value={"Category 1"}>Category 1</MenuItem>
-        <MenuItem value={"Category 2"}>Category 2</MenuItem>
-        <MenuItem value={"Category 3"}>Category 3</MenuItem>
-        <MenuItem value={"Category 4"}>Category 4</MenuItem>
+        <MenuItem value={"Category 1"}>Animal Trivia</MenuItem>
+        <MenuItem value={"Category 2"}>Space Trivia</MenuItem>
+        <MenuItem value={"Category 3"}>Sports Trivia</MenuItem>
+        <MenuItem value={"Category 4"}>Weather Trivia</MenuItem>
         </Select>
     </FormControl>  
     </div>

@@ -32,6 +32,10 @@ const GameBoard = () => {
     return colorMap[content] || "white";
   };
 
+  const getDice = (d) => {
+    document.getElementById('diceNumber').innerHTML = Math.floor(Math.random()*6) + 1;
+  }
+
   const renderTile = (content, color) => (
     <Box
       border={1}
@@ -54,9 +58,10 @@ const GameBoard = () => {
       </Typography>
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={12} sm={3}>
-          <Button variant="contained" style={{ backgroundColor: 'lightcoral', color: 'black' }}>
+          <Button variant="contained" style={{ backgroundColor: 'lightcoral', color: 'black' }} onClick={getDice}>
             Roll Dice
           </Button>
+          <h1 id='diceNumber'></h1>
         </Grid>
         <Grid item xs={12} sm={6}>
           <Box border={1} borderColor="grey.400" p={2} borderRadius={1}>

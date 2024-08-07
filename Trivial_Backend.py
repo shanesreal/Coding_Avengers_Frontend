@@ -4,6 +4,7 @@ import random
 app = Flask(__name__)
 
 
+
 @app.route('/dice')
 def rollDice():
     value = random.randint(1,6)
@@ -13,38 +14,11 @@ def rollDice():
     <h1 id="dice">{value}</h1>
     </div>'''
 
-@app.route('/game')
+
+@app.route('/database')
 def getDatabase():
-    teach = Teacher("Ify","123456")
-
-    teach.addC("Addition")
-    teach.addQ("Addition","What's 5 + 5 ?","10")
-    teach.addQ("Addition","What's 10 + 10 ?","20")
-    teach.addQ("Addition","What's 10 + 5 ?","15")
-    teach.addQ("Addition","What's 0 + 5 ?","5")
-
-    teach.addC("Subtraction")
-    teach.addQ("Subtraction","What's 5 - 5 ?","0")
-    teach.addQ("Subtraction","What's 10 - 5 ?","5")
-    teach.addQ("Subtraction","What's 15 - 5 ?","10")
-    teach.addQ("Subtraction","What's 25 - 5 ?","20")
-        
-
-    teach.addC("Multiplication")
-    teach.addQ("Multiplication","What's 5 * 5 ?","25")
-    teach.addQ("Multiplication","What's 10 * 5 ?","50")
-    teach.addQ("Multiplication","What's 2 * 5 ?","10")
-    teach.addQ("Multiplication","What's 4 * 5 ?","20")
-
-
-    teach.addC("Division")
-    teach.addQ("Division","What's 5 / 5 ?","1")
-    teach.addQ("Division","What's 10 / 5 ?","2")
-    teach.addQ("Division","What's 20 / 5 ?","4")
-    teach.addQ("Division","What's 40 / 5 ?","8")
-
-    database = teach.data.database
-
+ 
+    database = teacher.data.database
     return jsonify(database)
     
     
@@ -131,7 +105,7 @@ class Teacher:
 
     def addQ(self, category, q, a):
         if(category not in self.data.database.keys()):
-            self.addC(category)
+            self.data.addCategory(category)
             self.data.addQuestion(category,q,a)
         else:
             self.data.addQuestion(category,q,a)
@@ -155,6 +129,46 @@ class Teacher:
             print("")
         print("------------------------------------------------------------")
         return
+    
+    def creation(self):
+        
+        print("Hello ",self.getName())
+        print(" ")
+
+        ans = ""
+        while ans != "4":
+
+            print("What would you like to do?")
+            print("1. Add Category")
+            print("2. Add Question")
+            print("3. Show Database")
+            print("4. Exit")
+            ans = input(" ")
+
+            if ans.strip() == "1":
+                c = input("What is the name of the category you would like to add? ")
+                self.addC(c)
+                print(c," has been added to the database!")
+
+            elif ans.strip() == "2":
+                c = input("What category would you like to add the question to? (note that if the cateogry doesn't exist it will be created) ")
+                q = input("What question would you like to add to: " + c + " ")
+                a = input("What is the answer to that question? ")
+                self.addQ(c,q,a)
+                print("The question and answer have been successfuly added to the database!")
+
+            elif ans.strip() == "3":
+                print(" ")
+                self.showDatabase()
+
+            elif ans.strip() == "4":
+                print("Thank you for using the database creator!")
+            
+            else:
+                print("Invalid choice selected")
+
+            print(" ")
+            print(" ")
 
 class Player:
     def __init__(self,name,color):
@@ -245,6 +259,7 @@ class Display:
         print("Color: yellow        Category: ",self.visual["yellow"])
 """
 
+'''
 class Gameplay:
 
     def __init__(self):
@@ -397,9 +412,13 @@ class Gameplay:
                 return True
             
         return False
-    
+'''
+
+teacher = Teacher("I","12345")
+
 if __name__=="__main__":
     
     #game = Gameplay()
+    teacher.creation()
     appData()
     app.run()

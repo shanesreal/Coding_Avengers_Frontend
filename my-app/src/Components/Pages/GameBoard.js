@@ -82,9 +82,17 @@ const GameBoard = () => {
     const totalCols = boardLayout[0].length;
     col += diceRoll;
 
-    if (col >= totalCols) {
-      row = (row + Math.floor(col / totalCols)) % boardLayout.length;
-      col = col % totalCols;
+    while (col >= totalCols) {
+      row = (row + 1) % boardLayout.length;
+      col -= totalCols;
+    }
+
+    while (boardLayout[row][col] === "delete" || boardLayout[row][col] === "") {
+      col++;
+      if (col >= totalCols) {
+        row = (row + 1) % boardLayout.length;
+        col = 0;
+      }
     }
 
     if (row !== position[0] || col !== position[1]) {

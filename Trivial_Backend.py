@@ -7,12 +7,8 @@ CORS(app)
 
 @app.route('/dice')
 def rollDice():
-    value = random.randint(1,6)
-    event = 'dice = document.getElementById("dice"); value = Math.floor(Math.random()*6) + 1; dice.innerHTML = value;'
-    return f'''
-    <div><button onclick="document.getElementById('dice').innerHTML = Math.floor(Math.random()*6) + 1;" style="display: block;">Dice</button>
-    <h1 id="dice">{value}</h1>
-    </div>'''
+    value = random.randint(1, 6)
+    return jsonify({"value": value})
 
 @app.route('/game')
 def getDatabase():

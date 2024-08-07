@@ -18,7 +18,30 @@ def getDatabase():
     database = teacher.data.database
     return jsonify(database)
     
+@app.route('/questions')
+def getQuestions():
+
+    teach = Teacher("Ify","123456")
+
+    teach.addC("Animal Trivia")
+    teach.addQ("Animal Trivia", "What is the fastest land animal?", "Cheetah")
+    teach.addQ("Animal Trivia", "What is the fastest aquatic animal?", "Sailfish")
+    teach.addQ("Animal Trivia", "What is the largest animal on earth?", "Blue Whale")
+
+    teach.addC("Space Trivia")
+    teach.addQ("Space Trivia", "Which planet is closest to Earth?", "Venus")
+    teach.addQ("Space Trivia", "What is the largest planet in our solar system?", "Jupiter")
+
+    teach.addC("Sports Trivia")
+    teach.addQ("Sports Trivia", "Where did the Olympic games originate?", "Greece")
+    teach.addQ("Sports Trivia", "How many rings make up the Olympic rings?", "Five")
+    teach.addQ("Sports Trivia", "In what sport can you get a hole in one?", "Golf")
+
+    teach.addC("Weather Trivia")
+    teach.addQ("Weather Trivia", "What is the hottest continent on earth?", "Africa")
     
+    database = teach.data.database
+    return jsonify(database)
 
 @app.route('/')
 def appData():
@@ -416,6 +439,6 @@ teacher = Teacher("I","12345")
 if __name__=="__main__":
     
     #game = Gameplay()
-    teacher.creation()
+    #teacher.creation()
     appData()
     app.run()

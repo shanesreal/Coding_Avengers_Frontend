@@ -14,11 +14,18 @@ const GameBoard = () => {
     ["Roll Again", "yellow", "red", "green", "HQ3", "yellow", "red", "green", "Roll Again"],
   ];
 
+  const pathSequence = [
+    [0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8],
+    [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8],
+    [8, 7], [8, 6], [8, 5], [8, 4], [8, 3], [8, 2], [8, 1], [8, 0],
+    [7, 0], [6, 0], [5, 0], [4, 0], [3, 0], [2, 0], [1, 0]
+  ];
+
   const initialPositions = {
-    p1: { position: [2, 2], hasMoved: false },
-    p2: { position: [2, 6], hasMoved: false },
-    p3: { position: [6, 2], hasMoved: false },
-    p4: { position: [6, 6], hasMoved: false }
+    p1: { position: 0, hasMoved: false },
+    p2: { position: 0, hasMoved: false },
+    p3: { position: 0, hasMoved: false },
+    p4: { position: 0, hasMoved: false }
   };
 
   const initialScores = {
@@ -76,30 +83,25 @@ const GameBoard = () => {
 
   const movePlayer = (player, diceRoll) => {
     const newPos = { ...positions };
-    const { position } = newPos[player];
-    let [row, col] = position;
+    let newPositionIndex = newPos[player].position + diceRoll;
 
-    const totalCols = boardLayout[0].length;
-    col += diceRoll;
-
-    if (col >= totalCols) {
-      row = (row + Math.floor(col / totalCols)) % boardLayout.length;
-      col = col % totalCols;
+    if (newPositionIndex >= pathSequence.length) {
+      newPositionIndex = pathSequence.length - 1;
     }
 
-    if (row !== position[0] || col !== position[1]) {
-      newPos[player] = { position: [row, col], hasMoved: true };
-      setPositions(newPos);
+    newPos[player].position = newPositionIndex;
+    newPos[player].hasMoved = true;
+    setPositions(newPos);
 
-      const newScores = { ...scores };
-      newScores[player] += 1;
-      setScores(newScores);
+    const newScores = { ...scores };
+    newScores[player] += 1;
+    setScores(newScores);
 
-      if (newScores[player] >= 4) {
-        setWinner(player);
-        return;
-      }
+    if (newScores[player] >= 4) {
+      setWinner(player);
+      return;
     }
+
     const nextPlayer = getNextPlayer(player);
     setCurrentPlayer(nextPlayer);
     updateQuestion(nextPlayer);
@@ -131,9 +133,11 @@ const GameBoard = () => {
 
   const renderTile = (content, color, row, col) => {
     let players = Object.entries(positions).filter(([key, value]) => {
-      const [r, c] = value.position;
+      const posIndex = value.position;
+      const [r, c] = pathSequence[posIndex];
       return r === row && c === col;
     }).map(([key]) => key);
+
     return (
       <Box
         border={1}

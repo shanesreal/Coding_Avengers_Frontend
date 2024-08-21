@@ -89,17 +89,22 @@ const GameBoard = () => {
       newPositionIndex = pathSequence.length - 1;
     }
 
+    const newPosCoords = pathSequence[newPositionIndex];
+    const tileContent = boardLayout[newPosCoords[0]][newPosCoords[1]];
+  
     newPos[player].position = newPositionIndex;
     newPos[player].hasMoved = true;
     setPositions(newPos);
 
-    const newScores = { ...scores };
-    newScores[player] += 1;
-    setScores(newScores);
-
-    if (newScores[player] >= 4) {
-      setWinner(player);
-      return;
+    if (tileContent.startsWith("HQ")) {
+      const newScores = { ...scores };
+      newScores[player] += 1;
+      setScores(newScores);
+  
+      if (newScores[player] >= 4) {
+        setWinner(player);
+        return;
+      }
     }
 
     const nextPlayer = getNextPlayer(player);

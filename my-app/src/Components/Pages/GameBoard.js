@@ -84,10 +84,7 @@ const GameBoard = () => {
   const movePlayer = (player, diceRoll) => {
     const newPos = { ...positions };
     let newPositionIndex = newPos[player].position + diceRoll;
-
-    if (newPositionIndex >= pathSequence.length) {
-      newPositionIndex = pathSequence.length - 1;
-    }
+    newPositionIndex = newPositionIndex % pathSequence.length;
 
     const newPosCoords = pathSequence[newPositionIndex];
     const tileContent = boardLayout[newPosCoords[0]][newPosCoords[1]];
